@@ -1,0 +1,37 @@
+﻿@model Lab06.App_Start.MyDbContext
+
+@{
+    ViewBag.Title = "Sellers page";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+
+<body>
+    @using (Html.BeginForm("Delete", "Seller"))
+    {
+        <table style="width: 100%">
+            <tr>
+                <th>id</th>
+                <th>Seller's name</th>
+            </tr>
+            @foreach (var seller in Model.Sellers.ToList())
+            {
+                <tr>
+                    <td>@seller.id</td>
+                    <td>@seller.name</td>
+                    <td><a href="/Seller/UpdateSeller/@seller.id/" role="button"><span aria-hidden="true">edit</span></a></td>
+                    <td><a href="/Seller/DeleteSeller/@seller.id/" role="button"><span aria-hidden="true">delete</span></a></td>
+                </tr>
+            }
+        </table>
+    }
+
+    @using (Html.BeginForm("Add", "Seller"))
+    {
+        <h6>Insert new Seller</h6>
+        <label>seller's name</label>
+        <input type="text" name="sellerName" id="sellerName" value="" />
+        <input type="submit" value="Save" />
+    }
+</body>
